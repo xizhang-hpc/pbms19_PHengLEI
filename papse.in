@@ -1,0 +1,207 @@
+title
+test
+#
+# first simulation parameters
+# folders for the grid files
+GridFolder
+./
+# number of Zones
+nZones
+1
+# steady or unsteady (0 -- unsteady; 1 -- steady)
+steady  
+1
+# dimension of flow field
+dim   
+3
+# total steps of iteration
+$I-n_steps
+5
+# boundary condition input from file or not (0 -- not; 1 -- input from file)
+$I-bcInput
+0
+#
+# Zone Data or parameters
+#
+Zone 
+All
+$I-grid_format
+0
+$I-nperiod
+0
+$I-nstart    $I-r_steps   $I-move_grid   $I-dual_time  $D-real_dt      $I-gen_movegrid   $I-io_form
+0              0              0              0            0.136           0                 0
+$I-restart   $I-turbRst    $D-scale        $I-kmove
+0               0             1.0             0
+#parameters for partition(0-prince ;1--metis;2-geometry)
+$I-n_domain      $I-mypart
+0                   1
+#################################################################################################
+#                                      main parameters                                          #
+#################################################################################################
+# Mach number, Angle of attack and Angle of yaw
+# (active for air=1, if air=0, given by incoming flow condition)
+$D-mach  $D-alpha  $D-beita   $D-re         $D-T       $D-Tw
+0.2        6.0       0.0       9.0e6       300.0      -300.0
+# time iteration method 
+#     1 -- Multi-stage
+#     2 -- Point implicit
+#     3 -- Full implicit
+#     4 -- LU-SGS
+#     5 -- Block LU-SGS  
+$I-tScheme 
+1
+#dtime(0-local time step;1-min time step)
+$D-cfl_start  $D-cfl_end  $I-cfl_nstep   $D-dt_ratio     $I-dtime  $D-pseudo
+0.1             0.1           1000          1.0e10          0         10
+# compressible flow or uncompressible flow (0 -- uncompressible; 1 -- compressible)
+$I-comp $I-INCOMP_FLOW $I-precon $I-myformat  $D-lref      $D-sref      $D-xref    $D-yref      $D-zref 
+1           0              0          0         1.0          10.0         0.0       0.0           0.0
+# order of spacial scheme
+#     1 -- first order;
+#     2 -- second order without limiter 
+#     3 -- second order with Barth's limiter
+#     4 -- second order with Vancatarishnan's limiter
+$I-order 
+1
+# EPS for Vencat's limiter
+$D-eps_vencat
+10.0
+# viscous model
+#     0 -- inviscid 
+#     1 -- laminar
+#     2 -- k_e model
+#     3 -- LES
+#     4 -- SA model
+#     5 -- DES
+#     6 -- KW
+$I-vis_mode  $I-prt_turb $I-turb_off  $I-mode_type $I-WallDist $I-comp_revise $I-Tlim
+0             0            0            2           0           0              0
+# flux splitting method
+#     1 -- ROE's flux splitting method
+#     2 -- Van Leer's flux splitting method
+#     3 -- LIOU's flux splitting method
+#     4 -- ZJW's flux splitting method
+#     5 -- CUSP's flux splitting method
+$I-flux 
+1
+#parameter for calculating gradient: 1-dis; 2-fnd; 3-lsm; other-org;
+$I-gradient
+0
+#################################################################################################
+#                                 Gridgen Para                                                   #
+#################################################################################################
+#parameters for Grid generation using "agglomeration method"
+$I-agg_gridgen  $I-slice_axis    $D-slice_position    $I-extract_iter  $I-dump_hygrid  
+0                     1                   5.0                    1                1              
+$I-merge_face    $D-merge_angle  $D-merge_vol         $D-merge_area
+0                  0.1                   0.4                    0.5
+$I-comput_agg    $I-gridgraph    $I-comput_walldist
+0                    0                    1
+#################################################################################################
+#some parameter for resi-smooth
+$I-smooth_resi    $D-s_nsweep     $D-s_relax
+0                 2               0.8
+# CEM or not (0 -- not; 1 -- CEM )
+$I-CEM  
+0
+# moveing grid or not (0 -- stationary grid; 1 -- moving grid)
+$I-set_oldvar
+0
+# multi-grid or not (0 -- not; 1 -- multi-grid)
+$I-mgrid  $I-cg_vis   $I-n_befmg  $I-turb_MG  $I-out_MG
+0             0            0          0            0
+# ????
+$I-method 
+1        
+$I-shock_lvl $I-check_lim
+0            1
+# time scheme for unsteady computation
+#     0 -- backward Euler;
+#     1 -- Crank Nicholson
+#     2 -- second-order backward
+$I-time_scheme
+0
+# Discrete Numerical Method or not for LHS matrices (0 -- not; 1 -- DNM)
+$I-dnm $D-delta_dnm
+0      1.0e-6
+# linear solver for full implicit
+#     1 -- CGS_ILU_SOLVER
+#     2 -- JACOBI_SOLVER
+#     3 -- GAUSS_S_SOLVER
+#     4 -- CGS_BILU_SOLVER
+$I-linear_solver
+2              
+# convergence tolerance in sub-iteration
+$D-epsilon  
+1.0e-01    
+# number of sweep in sub-iteration
+$I-sweeps 
+5        
+# Incoming flow condition
+$D-u       $D-v       $D-w   $D-rho      $D-p_bar    $D-p
+265.547    14.1956    0.0    0.702581    50355.7    0.0
+# Given constant viscosity for fluid or not (0 -- given; 1 -- Sutherland's law)
+$I-air     
+1         
+# some parameters for kw_mode
+$I-kw_sweeps $D-kw_epsilon
+10           0.0001 
+# some parameters for ke_mode
+$D-ke_k      $D-ke_e    $I-ke_sweeps $D-ke_epsilon 
+1.0000E-01   1.5000E+01 10           0.0001        
+# some parameters for sa_model
+$D-sa_nu     $I-sa_sweeps $D-sa_epsilon 
+1.0000E-01   10           0.0001        
+# some constants for air      
+$D-gam   $D-gascon   $D-amu   $D-prl   $D-prt   $D-cp  
+1.4      286.69      1.       0.72     0.9      1003. 
+# constants for entropy modification
+$D-alf_l $D-alf_n
+0.1     0.1
+# some parameters for output
+$D-x_min $D-x_max $I-nPoints   $D-c   $I-post_form    $I-uns_post     $D-dpre
+0.       1.       21           -1.    1               1               983.75
+$I-n_pre $I-n_post $I-n_solve $I-n_fas   $I-Pre_Force $I-All_Force  $I-dump_yplus  $I-post_field  $I-record
+1        1         1          1            100           100             0              0              100
+# number of multi-stage for Runge-Kutta method
+$I-n_stage
+3          
+# parameters for N_stage Runge-Kutta method
+$D[3]-lamda
+0.33 0.5 1.0
+# Curve wall modification (0 -- not; 1 -- modify)
+$I-curveWall
+0
+# some parameters of GMRES method
+$I-GMRES  $I-kspan $I-GMRESLUSGS $I-gmresweeps $D-gmresepsilon
+0         20       0             1             1.0e-2
+Zone
+All
+BC n_patch
+3
+patch type   kbody   $D-u       $D-v       $D-w    $D-rho     $D-T    $D-p   $D-ke_k  $D-ke_e $D-sa_nu
+1      3       1     0.0        0.0        0.0     0.702581   300.0   0.0    0.1       15.0     1.0e-01
+patch type   kbody   $D-u       $D-v       $D-w    $D-rho     $D-T    $D-p   $D-ke_k  $D-ke_e $D-sa_nu
+2      6       0     0.0        0.0        0.0     0.702581   300.0   0.0    0.0      0.0    0.0
+patch type   kbody   $D-u       $D-v       $D-w    $D-rho     $D-T    $D-p   $D-ke_k  $D-ke_e $D-sa_nu
+3      4       0     0.0        0.0        0.0     0.702581   250.0   0.0    0.0      0.0    0.0
+# Boundary condition type
+#     1 --  FIX_ALL
+#     2 --  FIX_P
+#     3 --  WALL
+#     4 --  SYMM
+#     5 --  EXTRAP
+#     6 --  FAR_FIELD
+#     7 --  TOTAL_P
+#     8 --  PROFILE
+#     9 --  FIX_V
+#    10 --  INTERFACE
+#    11 --  INTERP
+#    12 --  CYCLIC
+#    13 --  WALLF
+#    14 --  FAR_FIELD_TONY
+#    17 --  FAR_FIELD_RAND
+#    18 --  FAR_FIELD_NEW
+#    15 --  CAA_INLET
+#    16 --  CAA_EXIT
