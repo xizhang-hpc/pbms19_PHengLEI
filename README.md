@@ -3,10 +3,10 @@ paper data files:
 The executing environment is CUDA9.0.
 Four exe files are a.out.atomic, a.out.color, a.outcolorReorderFinal, and a.outColorReorderFaceRenumber.
 Those files are executed by commands:
-nvprof ./a.out.atomic
-nvprof ./a.out.color
-nvprof ./a.outcolorReorderFinal
-nvprof ./a.outColorReorderFaceRenumber
+nvprof ./Atomic
+nvprof ./Graph_color
+nvprof ./R_Graph_color
+nvprof ./RR_Graph_color
 
 By nvprof, the executing time is recorded.
 
