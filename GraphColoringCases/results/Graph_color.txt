@@ -1,0 +1,59 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                                                          +
++                                                          +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Reading grids for zone 1
+==172== NVPROF is profiling process 172, command: ./a.out.color
+Grid  1 has 537816 points,1338344 faces and 400704 cells
+min and max volumes are 6.2358e-10  6.6231e+00 
+end initiating NS Solver.
+coloring faces for parallel computing!
+establish face and cell relationship:c2f, c2fLR, c2fPosi, nfpc
+sumNfpc = 2404224
+establish face conflict relationship:faceConflict, nfcf, faceConflictPosi
+sumNfcf = 12021120
+coloring faces!
+total faces:1338344
+establishing face groups!
+All of faces have 8 colors.
+color 0 owns 334807 faces.
+color 1 owns 202126 faces.
+color 2 owns 200353 faces.
+color 3 owns 200303 faces.
+color 4 owns 141856 faces.
+color 5 owns 141871 faces.
+color 6 owns 117026 faces.
+color 7 owns 2 faces.
+coloring is finished!
+0.9945220.994522-0.994522
+==172== Profiling application: ./a.out.color
+
+ #iter   rho_res      mx_res      my_res      mz_res     et_res     dt_max    dt_min    ns_cpu      ke_k_res      ke_e_res     tot_cpu
+     1  3.46e+01 1.72e+02 2.95e+01 2.86e-01 2.18e+03 4.98e-03 2.54e-09 1.75e+00
+     2  3.39e+01 1.68e+02 2.94e+01 8.42e-01 2.14e+03 4.98e-03 2.54e-09 3.50e+00
+     3  3.33e+01 1.65e+02 2.92e+01 1.38e+00 2.10e+03 4.99e-03 2.54e-09 5.53e+00
+     4  3.26e+01 1.62e+02 2.91e+01 1.89e+00 2.07e+03 5.00e-03 2.54e-09 7.54e+00
+     5  3.20e+01 1.59e+02 2.89e+01 2.39e+00 2.03e+03 5.01e-03 2.54e-09 9.51e+00Job well done !!!
+==172== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   50.26%  160.48ms       110  1.4589ms  672.26us  7.1044ms  [CUDA memcpy DtoH]
+                   32.88%  104.99ms       128  820.26us  1.6640us  2.2496ms  [CUDA memcpy HtoD]
+                   11.85%  37.826ms       600  63.043us  4.6400us  115.62us  kernelColorDqLoopOverNTFace(int, int, int, double*, double*, double*, int*, double*, double*, double*, double*, double*, int*, int*)
+                    1.16%  3.7184ms        75  49.578us  48.352us  51.841us  kernelDqLoopCell(int, double*, double*, double*, double*)
+                    0.95%  3.0404ms        75  40.538us  39.936us  41.120us  kernelDqSet(int, double*, double*, double*, double*, double*, double*)
+                    0.79%  2.5338ms       225  11.261us  9.9200us  11.872us  kernelStoreBoundGrad(int, int, int, double*, double*, int*)
+                    0.62%  1.9738ms        15  131.59us  130.79us  132.35us  kernelComputeShockWave(int, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, int*, int*)
+                    0.56%  1.7726ms        75  23.634us  22.528us  25.248us  kernelDqLoopOverNBFace(int, int, double*, double*, double*, int*)
+                    0.46%  1.4533ms        75  19.377us  19.168us  19.904us  kernelDqmInit(int, double*, double*, double*)
+                    0.44%  1.4133ms        75  18.844us  17.920us  19.200us  kernelDqInitialization(int, double*, double*, double*)
+                    0.03%  106.59us        15  7.1060us  7.0080us  7.2000us  kernelInitShockWave(int, double*)
+      API calls:   51.03%  398.80ms        45  8.8623ms  5.8550us  385.29ms  cudaMalloc
+                   47.43%  370.72ms       238  1.5577ms  5.8950us  7.8893ms  cudaMemcpy
+                    1.14%  8.8884ms      1230  7.2260us  4.7480us  85.273us  cudaLaunch
+                    0.18%  1.4163ms     11940     118ns      88ns  5.5610us  cudaSetupArgument
+                    0.14%  1.1135ms        94  11.846us     161ns  453.03us  cuDeviceGetAttribute
+                    0.03%  268.31us         1  268.31us  268.31us  268.31us  cuDeviceTotalMem
+                    0.03%  251.18us      1230     204ns     102ns  8.0040us  cudaConfigureCall
+                    0.01%  95.342us         1  95.342us  95.342us  95.342us  cuDeviceGetName
+                    0.00%  2.6690us         3     889ns     188ns  2.0360us  cuDeviceGetCount
+                    0.00%  1.0480us         2     524ns     241ns     807ns  cuDeviceGet
